@@ -9,12 +9,11 @@ export class AppComponent {
   newMemberName = '';
   members: string[] = [];
   errorMessage = "";
-  numberOfTeams: number | "" = "";
+  numberOfTeams: '' | number = '';
   teams: string[][] = [];
 
-
-  onInput(member: string) {
-    this.newMemberName = member;
+  onInput(value: string) {
+    this.newMemberName = value;
   }
 
 
@@ -22,6 +21,12 @@ export class AppComponent {
     this.numberOfTeams = Number(value);
   }
 
+
+  clear() {
+    this.members = [];
+    this.teams = [];
+
+  }
 
 
   addMember() {
@@ -37,18 +42,21 @@ export class AppComponent {
 
 
   generateTeams() {
+    const allMembers = [...this.members];
+    this.teams = [];
 
-    if (!this.numberOfTeams || this.numberOfTeams <= 0) {
+    if (this.numberOfTeams <= 0) {
       this.errorMessage = "Invalid number of teams";
       return;
     }
 
     if (this.members.length < this.numberOfTeams) {
       this.errorMessage = "Not enough members";
+      return;
     }
 
     this.errorMessage = "";
-    const allMembers = [...this.members];
+
 
     while (allMembers.length) {
       for (let i = 0; i < this.numberOfTeams; i++) {
@@ -65,17 +73,11 @@ export class AppComponent {
           this.teams[i] = [member];
         }
       }
-      this.members = [];
-
-
     }
+    this.members = [];
+    this.numberOfTeams = '';
+
   }
-
-
-
-
-
-
 }
 
 

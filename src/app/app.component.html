@@ -9,6 +9,7 @@
 
   <div class="container">
     <div class="ui card">
+      <button id="clear" (click)="clear()">Clear</button>
       <h1>Team Generator</h1>
       <ul class="list">
         <li *ngFor="let member of members">{{ member }}</li>
@@ -44,6 +45,7 @@
         *ngFor="let team of teams; let i = index"
         [team]="team"
         [index]="i"
+        id="team-sheet"
       ></app-team>
     </div>
   </div>
